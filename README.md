@@ -21,4 +21,4 @@ A B C D    M N O
 E F G H
 I J K L    P Q R
 ```
-Python script osczynthian.py is run after start of pi zero and wait on keyboards input.
+Python script [osczynthian.py](osczynthian.py) is run after start of pi zero and wait on keyboards input.
