@@ -4,7 +4,7 @@ Controller is from:
 + Waveshare ETH/USB HUB HAT (B) - for network connection
 + 2x Keyboard with 12 buttons + 2 knobs, one-handed macromechanical keyboard
 
-![Picture of Keyboards.]([IMG_20231029_161651.jpg])
+![Picture of Keyboards.](IMG_20231029_161651.jpg)
 
 Keyboard No. 1 writes letters and ENTER:
 ```
