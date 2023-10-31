@@ -9,11 +9,12 @@ hostname = 'zynthian.local'
 port = 1370
 
 osc_list = {
-'b' : 'CHAIN_OPTIONS', # - option screen
+'c' : 'CHAIN_OPTIONS', # - option screen
 'a' : 'SCREEN_AUDIO_MIXER', # - audio mixer screen
-'c' : 'CHAIN_CONTROL', # - control screen
+'b' : 'CHAIN_CONTROL', # - control screen
 'd' : 'SCREEN_ZS3', # - subdsnapshot managment
-'e' : 'SCREEN_ADMIN', # - admin screen
+'e' : 'SCREEN_MAIN_MENU',
+#'e' : 'SCREEN_ADMIN', # - admin screen
 'f' : 'SCREEN_ALSA_MIXER', # - audio levels screen
 'g' : 'SCREEN_PRESET', # - preset/banks screen
 'h' : 'SCREEN_SNAPSHOT', # - snapshot managment
@@ -85,7 +86,7 @@ except liblo.AddressError(err):
     print(err)
     sys.exit()
 # show start words
-print('Ovládání Zynthianů')
+print('Remote controler of Zynthian starting')
 print('Connected to ', hostname, ' Lets play')
 
 # main cycle
@@ -93,7 +94,6 @@ run = True
 
 while run:
     seq = input()
-    #seq = inp.strip()
     if seq in osc_list:
         com = "/CUIA/" + osc_list[seq]
         arg1 = ''
@@ -103,10 +103,16 @@ while run:
             arg2 = str(arg2_list[seq])
         if com == "/CUIA/ZYNPOT":
             arg1 = int(arg1_list[seq])
-            arg2 = int(arg2_list[seq])
+            arg2 = int(arg2_list[seq]) 
+        if arg1!='' and arg2!='':
+            liblo.send(target, com, arg1, arg2)
+        else:
+            liblo.send(target, com)
         print(com, arg1, arg2)
-        liblo.send(target, com, arg1, arg2)
     else:
         print('NonExisting input')
+        if seq == 'x':
+            print('/CUIA/CHAIN_CONTROL')
+            liblo.send(target, '/CUIA/CHAIN_CONTROL')
 
 
